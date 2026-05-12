@@ -185,36 +185,6 @@
             <button class="btn-add" onclick="addToCart('Limón Pie')">¡La quiero!</button>
         </div>
 
-        <div class="donut-card" style="grid-column: 1 / -1; background: #fff5f8; border: 3px dashed var(--rosa-fuerte);">
-    <span class="donut-img">🎨</span>
-    <h3>¡Crea tu propia Promesa!</h3>
-    <p>Elige cómo quieres tu mini dona única:</p>
-
-        <select id="glaseado" style="padding: 10px; border-radius: 10px; border: 1px solid var(--rosa-fuerte);">
-            <option value="">-- Glaseado --</option>
-            <option value="Fresa">Fresa</option>
-            <option value="Chocolate">Chocolate</option>
-            <option value="Chicle">Chicle</option>
-            <option value="Limón">Limón</option>
-        </select>
-
-        <select id="topping" style="padding: 10px; border-radius: 10px; border: 1px solid var(--rosa-fuerte);">
-            <option value="">-- Topping --</option>
-            <option value="Chispas">Chispitas</option>
-            <option value="Chispas de Chocolate Blanco">Chispitas de Chocolate Blanco</option>
-            <option value="Chispas de Chocolate Negro">Chispitas de Chocolate Negro</option>
-            <option value="M&M">M&M</option>
-            <option value="Maní">Maní</option>
-            <option value="Fresa">Freza en trozos</option>
-            <option value="Bolitas de Chocolate">Bolitas de Chocolate</option>
-            <option value="Pepitas de Colores">Pepitas de Colores</option>
-            <option value="Sprinkles de Colores">Sprinkles de Colores</option>
-            <option value="Sprinkles de Chocolate">Sprinkles de Chocolate</option>
-        </select>
-    </div>
-
-    <button class="btn-add" onclick="addCustomDonut()">Añadir mi creación 🍩</button>
-
     </div>
 
     <a href="#" id="cart-button" onclick="sendWhatsApp()">
@@ -242,30 +212,6 @@
             });
         }
 
-        function addCustomDonut() {
-    const base = document.getElementById('base').value;
-    const glaseado = document.getElementById('glaseado').value;
-    const topping = document.getElementById('topping').value;
-
-    if (!base || !glaseado || !topping) {
-        alert("¡Oye! Olvidaste elegir algún ingrediente para tu creación.");
-        return;
-    }
-
-    const customName = `Dona personalizada (Base: ${base}, Glaseado: ${glaseado}, Topping: ${topping})`;
-    cart.push(customName);
-    document.getElementById('cart-count').innerText = cart.length;
-
-    // Efecto de confeti especial para creaciones
-    confetti({
-        particleCount: 150,
-        spread: 100,
-        origin: { y: 0.6 },
-        colors: ['#6d4c41', '#ff85a1', '#ffffff']
-    });
-
-    alert("¡Tu dona personalizada ha sido añadida a la caja!");
-}
 
         function sendWhatsApp() {
             if(cart.length === 0) {
