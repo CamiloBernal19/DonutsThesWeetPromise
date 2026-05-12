@@ -2,24 +2,217 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Donuts The Sweet Promise</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donuts The Sweet Promise | Catálogo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
     <style>
-        body { font-family: 'Comic Sans MS', sans-serif; background-color: #fff0f5; text-align: center; }
-        .donut-card { background: white; border-radius: 20px; padding: 20px; display: inline-block; margin: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .donut-card:hover { transform: scale(1.1) rotate(5deg); }
-        h1 { color: #ff69b4; }
-        button { background: #ff69b4; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; }
+        :root {
+            --rosa-pastel: #ffdeeb;
+            --rosa-fuerte: #ff85a1;
+            --vainilla: #fdf6e3;
+            --chocolate: #6d4c41;
+            --texto: #4a4a4a;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--vainilla);
+            margin: 0;
+            color: var(--texto);
+        }
+
+        header {
+            background-color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px dashed var(--rosa-fuerte);
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--rosa-fuerte);
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px #fff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Tarjetas de Donas */
+        .donut-card {
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donut-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--rosa-fuerte);
+        }
+
+        .donut-img {
+            font-size: 80px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .donut-card h3 {
+            margin: 10px 0;
+            color: var(--chocolate);
+            font-size: 1.5rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--rosa-fuerte);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .btn-add {
+            background-color: var(--rosa-fuerte);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .btn-add:hover {
+            background-color: #ff5c81;
+            transform: scale(1.05);
+        }
+
+        /* Carrito flotante */
+        #cart-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .badge {
+            background: white;
+            color: #25d366;
+            padding: 2px 8px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
-    <h1>🍩 Donuts The Sweet Promise 🍩</h1>
-    <p>¡Las mini donas más divertidas del mundo!</p>
 
-    <div class="donut-card">
-        <h3>Mini Glaseada Rosa</h3>
-        <p>✨ Chispitas de colores</p>
-        <button onclick="alert('¡Añadido con dulzura! 🍩')">¡La quiero!</button>
+    <header>
+        <h1>🍩 Donuts The Sweet Promise</h1>
+        <p>¡Horneando promesas de felicidad en cada mordisco!</p>
+    </header>
+
+    <div class="container">
+        <div class="donut-card">
+            <span class="donut-img">🍓</span>
+            <h3>Fresa Pinky</h3>
+            <p>Glaseado de fresa natural con lluvia de corazones.</p>
+            <span class="price">$2.500</span>
+            <button class="btn-add" onclick="addToCart('Fresa Pinky')">¡La quiero!</button>
+        </div>
+
+        <div class="donut-card">
+            <span class="donut-img">🍫</span>
+            <h3>Choco-Explosión</h3>
+            <p>Doble chocolate con trozos de brownie encima.</p>
+            <span class="price">$3.000</span>
+            <button class="btn-add" onclick="addToCart('Choco-Explosión')">¡La quiero!</button>
+        </div>
+
+        <div class="donut-card">
+            <span class="donut-img">🍪</span>
+            <h3>Oreo Dream</h3>
+            <p>Crema de vainilla y mucha galleta Oreo triturada.</p>
+            <span class="price">$2.800</span>
+            <button class="btn-add" onclick="addToCart('Oreo Dream')">¡La quiero!</button>
+        </div>
+
+        <div class="donut-card">
+            <span class="donut-img">🍋</span>
+            <h3>Limón Pie</h3>
+            <p>Glaseado cítrico refrescante con ralladura de limón.</p>
+            <span class="price">$2.500</span>
+            <button class="btn-add" onclick="addToCart('Limón Pie')">¡La quiero!</button>
+        </div>
     </div>
 
-    </body>
+    <a href="#" id="cart-button" onclick="sendWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+        Pedir mi caja <span class="badge" id="cart-count">0</span>
+    </a>
+
+    <footer>
+        <p>&copy; 2024 Donuts The Sweet Promise - Hecho con ❤️</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(donutName) {
+            cart.push(donutName);
+            document.getElementById('cart-count').innerText = cart.length;
+            
+            // Efecto de Confeti al agregar
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff85a1', '#ffdeeb', '#fdf6e3']
+            });
+        }
+
+        function sendWhatsApp() {
+            if(cart.length === 0) {
+                alert("¡Tu cajita está vacía! Elige algunas donas primero.");
+                return;
+            }
+            
+            let message = "¡Hola! Quisiera pedir estas mini donas: " + cart.join(", ");
+            let phone = "573000000000"; // CAMBIA ESTO POR TU NÚMERO REAL
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</body>
 </html>
