@@ -227,53 +227,45 @@
     <script>
         let cart = [];
 
-        function addToCart(donutName) {
-            cart.push(donutName);
-            document.getElementById('cart-count').innerText = cart.length;
-            
-            // Efecto de Confeti al agregar
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#ff85a1', '#ffdeeb', '#fdf6e3']
-            });
+        function addToCart(name) {
+            cart.push(name);
+            updateCart();
+            showConfetti(['#ff85a1', '#ffffff']);
         }
 
         function addCustomDonut() {
-    const base = document.getElementById('base').value;
-    const glaseado = document.getElementById('glaseado').value;
-    const topping = document.getElementById('topping').value;
+            const b = document.getElementById('base').value;
+            const g = document.getElementById('glaseado').value;
+            const t = document.getElementById('topping').value;
 
-    if (!base || !glaseado || !topping) {
-        alert("¡Oye! Olvidaste elegir algún ingrediente para tu creación.");
-        return;
-    }
-
-    const customName = `Dona personalizada (Base: ${base}, Glaseado: ${glaseado}, Topping: ${topping})`;
-    cart.push(customName);
-    document.getElementById('cart-count').innerText = cart.length;
-
-    // Efecto de confeti especial para creaciones
-    confetti({
-        particleCount: 150,
-        spread: 100,
-        origin: { y: 0.6 },
-        colors: ['#6d4c41', '#ff85a1', '#ffffff']
-    });
-
-    alert("¡Tu dona personalizada ha sido añadida a la caja!");
-}
-
-        function sendWhatsApp() {
-            if(cart.length === 0) {
-                alert("¡Tu cajita está vacía! Elige algunas donas primero.");
+            if (!b || !g || !t) {
+                alert("Selecciona todas las opciones para tu dona personalizada ✨");
                 return;
             }
+
+            const customName = `Personalizada (Base: ${b}, Glaseado: ${g}, Topping: ${t})`;
+            cart.push(customName);
+            updateCart();
+            showConfetti(['#6d4c41', '#ff85a1']);
             
-            let message = "¡Hola! Quisiera pedir estas mini donas: " + cart.join(", ");
-            let phone = "3134803883"; // CAMBIA ESTO POR TU NÚMERO REAL
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+            // Limpiar selectores
+            document.getElementById('base').value = "";
+            document.getElementById('glaseado').value = "";
+            document.getElementById('topping').value = "";
+        }
+
+        function updateCart() {
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        function showConfetti(colors) {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.8 }, colors: colors });
+        }
+
+        function sendWhatsApp() {
+            if(cart.length === 0) return alert("Caja vacía");
+            let msg = "¡Hola! Quiero estas donas: " + cart.join(" | ");
+            window.open(`https://wa.me/573000000000?text=${encodeURIComponent(msg)}`, '_blank');
         }
     </script>
 </body>
