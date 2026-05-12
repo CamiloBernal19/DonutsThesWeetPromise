@@ -237,6 +237,31 @@
             });
         }
 
+        function addCustomDonut() {
+    const base = document.getElementById('base').value;
+    const glaseado = document.getElementById('glaseado').value;
+    const topping = document.getElementById('topping').value;
+
+    if (!base || !glaseado || !topping) {
+        alert("¡Oye! Olvidaste elegir algún ingrediente para tu creación.");
+        return;
+    }
+
+    const customName = `Dona personalizada (Base: ${base}, Glaseado: ${glaseado}, Topping: ${topping})`;
+    cart.push(customName);
+    document.getElementById('cart-count').innerText = cart.length;
+
+    // Efecto de confeti especial para creaciones
+    confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 },
+        colors: ['#6d4c41', '#ff85a1', '#ffffff']
+    });
+
+    alert("¡Tu dona personalizada ha sido añadida a la caja!");
+}
+
         function sendWhatsApp() {
             if(cart.length === 0) {
                 alert("¡Tu cajita está vacía! Elige algunas donas primero.");
